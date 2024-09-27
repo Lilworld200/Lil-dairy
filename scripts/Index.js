@@ -93,19 +93,10 @@ function AddEditEventListner(idx) {
 
 function ModifyDairyList(idx) {
 	console.log("loaded clicked");
-	const diarytitle = document.getElementById("head_tittle_js").value;
-	const time = document.getElementById("dairy_time").textContent;
-	const diaryChars = document.getElementById(
-		"js-characters_input_count"
-	).textContent;
-	const mainContent = document.getElementById("dairy_main_input_js").value;
-	const DiaryObject = {
-		tittle: diarytitle,
-		date: time,
-		characters: diaryChars,
-		context: mainContent
-	};
-	modifyMyListOfDiary(DiaryLists, idx, DiaryObject);
+	
+	const resultObject = getValuesFromRenderCreateDiary()
+	
+	modifyMyListOfDiary(DiaryLists, idx, resultObject);
 	diaryListRender(DiaryLists);
 }
 
@@ -136,6 +127,15 @@ function newDairyEventListners() {
 
 function addNewDiary() {
 	console.log("loaded clicked");
+
+	const resultObject = getValuesFromRenderCreateDiary();
+
+	DiaryLists.push(resultObject);
+	diaryListRender(DiaryLists);
+	// 	console.log(DiaryObject);
+}
+
+function getValuesFromRenderCreateDiary() {
 	const diarytitle = document.getElementById("head_tittle_js").value;
 	const time = document.getElementById("dairy_time").textContent;
 	const diaryChars = document.getElementById(
@@ -148,9 +148,7 @@ function addNewDiary() {
 		characters: diaryChars,
 		context: mainContent
 	};
-	DiaryLists.push(DiaryObject);
-	diaryListRender(DiaryLists);
-	// 	console.log(DiaryObject);
+	return DiaryObject;
 }
 
 function renderPreviewEventListners() {
