@@ -1,7 +1,11 @@
 import RenderHtml from "../scripts/renderHtml.js";
 import { MyDiarys } from "../scripts/dairys.js";
 
-import { getTodayDate, calculateChars } from "./sidefunctions.js";
+import {
+	getTodayDate,
+	calculateChars,
+	modifyMyListOfDiary
+} from "./sidefunctions.js";
 
 let DiaryLists = [...MyDiarys];
 
@@ -58,10 +62,53 @@ function showPreview(idx) {
 function editDairy(idx) {
 	console.log(idx);
 	let selectedDiarys = DiaryLists.filter((_, i) => {
-		return i != idx;
+		return i === idx;
 	});
-	
+	renderCreateDiary(selectedDiarys[0]);
+	addEditContent(selectedDiarys[0], idx);
 }
+
+function addEditContent(editDairy, idx) {
+	console.log(editDairy);
+	const diarytitle = document.getElementById("head_tittle_js");
+	diarytitle.value = editDairy.tittle;
+	const time = document.getElementById("dairy_time");
+	time.textContent = getTodayDate();
+	const diaryChars = document.getElementById("js-characters_input_count");
+	diaryChars.textContent = editDairy.characters;
+	const mainContent = document.getElementById("dairy_main_input_js");
+	mainContent.value = editDairy.context;
+
+	mainContent.addEventListener("input", () =>
+		calculateChars(mainContent, diaryChars)
+	);
+	AddEditEventListner(idx);
+}
+
+function AddEditEventListner(idx) {
+	const AddDiaryBtn = document.getElementById("add_to_diaries_collection");
+	console.log(AddDiaryBtn);
+	AddDiaryBtn.addEventListener("click", () => ModifyDairyList(idx));
+}
+
+function ModifyDairyList(idx) {
+	console.log("loaded clicked");
+	const diarytitle = document.getElementById("head_tittle_js").value;
+	const time = document.getElementById("dairy_time").textContent;
+	const diaryChars = document.getElementById(
+		"js-characters_input_count"
+	).textContent;
+	const mainContent = document.getElementById("dairy_main_input_js").value;
+	const DiaryObject = {
+		tittle: diarytitle,
+		date: time,
+		characters: diaryChars,
+		context: mainContent
+	};
+	modifyMyListOfDiary(DiaryLists, idx, DiaryObject);
+	diaryListRender(DiaryLists);
+}
+
 function deleteDairy(idx) {
 	console.log(idx);
 	let selectedDiarys = DiaryLists.filter((_, i) => {

@@ -1,5 +1,5 @@
 const RenderHtml = {
-	renderCreateDiary(inDate, diaryObject) {
+	renderCreateDiary(inDate) {
 		console.log("first");
 		const MainContainer = document.getElementById("js-main_container");
 		MainContainer.innerHTML = "loading";
