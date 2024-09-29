@@ -1,0 +1,84 @@
+#dairyHead_main_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#dairyHead_main_container_head {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 20px 0;
+	width: 100%;
+	mix-blend-mode: multiply;
+	aspect-ratio: 2/1;
+}
+
+#dairyHead_main_container_head img {
+	width: 50%;
+	height: auto;
+}
+
+.preview-container {
+	overflow: auto;
+	width: 84vw;
+	padding: 20px;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	border: 2px double var(--color_tec);
+	background-color: var(--bg_color_secondary);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(20px);
+}
+
+.preview_diary_head {
+	font-size: 1.5rem;
+	margin: 10px 0;
+}
+
+.time_info {
+	font-size: 0.75rem;
+	margin: 10px 0;
+	opacity: 0.5;
+}
+
+.DairysHead_button_container {
+	display: flex;
+	gap: 20px;
+	justify-content: end;
+	align-items: center;
+}
+
+.DiarysHead_edit_btn_js,
+.DiarysHead_delete_btn {
+	aspect-ratio: 1/1;
+	border: none;
+	background-color: transparent;
+}
+.DiarysHead_edit_btn_js,
+.DiarysHead_delete_btn img {
+	width: 1.8rem;
+}
+
+.NewDiary_Button {
+	position: fixed;
+	bottom: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 1/1;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+	background-color: var(--bg_color_tec);
+	mix-blend-mode: multiply;
+	backdrop-filter: blur(4px); /* Blurs the background behind the element */
+	-webkit-backdrop-filter: blur(10px);
+}
+
+.NewDiary_Button img {
+	width: 4rem;
+	filter: brightness(1.2) contrast(0.9); /* Slightly enhance the contrast and
+	brightness */
+}

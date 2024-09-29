@@ -1,20 +1,27 @@
 export let MyDiarys = [
 	{
-		tittle: "My first diary",
-		date: "September 20, 2024",
-		characters: "10 characters",
-		context: "i woke up happily today and had my birth"
-	},
-	{
-		tittle: "writing a diary code",
-		date: "december 15, 2024",
-		characters: "15 characters",
-		context: "i woke up happily today and had my bath"
-	},
-	{
-		tittle: "third on my list",
-		date: "February 26, 2024",
+		title: "My first diary",
+		date: "September 29, 2024",
 		characters: "20 characters",
-		context: "well here we go again "
+		context: "welcome to lil Dairy",
+		edited: false
+	},
+	{
+		title: "writing a diary code",
+		date: "September 29, 2024",
+		characters: "15 characters",
+		context:
+			"lil dairy is a website built within three days / nights 😅 , lilworld did not sleep mush trying to build this ",
+		edited: false
+	},
+	{
+		title: "how to use lil dairy",
+		date: "September 29, 2024",
+		characters: "20 characters",
+		context: `
+		*...tap on heading to view diary,       
+		*...tap on bin icon to delete,          
+		*...tap on edit icon to make changes to previous diaries`,
+		edited: false
 	}
 ];

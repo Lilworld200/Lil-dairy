@@ -1,0 +1,74 @@
+@font-face {
+	font-family: "BBL";
+	src: url("../assets/fonts/static/BubblegumSans-Regular.ttf")
+		format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Vibes";
+	src: url("../assets/fonts/static/GreatVibes-Regular.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Obitron";
+	src: url("../assets/fonts/static/Orbitron-Black.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
+}
+
+:root {
+	--color_primary: rgba(0, 0, 51, 1);
+	--color_secondary: ;
+	--color_tec: rgba(211, 211, 211, 1);
+	--bg_color_primary: rgba(211, 211, 211, 1);
+	--bg_color_secondary: rgba(248, 248, 255, 0.3);
+	--bg_color_tec: rgba(0, 0, 51, 1);
+	--font_size_primary:;
+	--font_size_secondary:;
+	--font_size_tec: ;
+	--font_family_primary: "BBL";
+	--font_family_secondary: "Vibes";
+	--font_family_tec: "Obitron";
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: var(--font_family_primary);
+	color: var(--color_primary);
+}
+
+body {
+	background-color: var(--bg_color_primary);
+}
+
+.main_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.exit_prev_button {
+	position: fixed;
+	top: 10px;
+	right: 28px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	width: 50px;
+	/*border: 2px solid rgba(211, 211, 211, 1);*/
+	border: none;
+	border-radius: 25px;
+	backdrop-filter: blur(5px);
+	padding: 10px;
+	box-shadow:
+		0 0 2px rgba(0, 0, 0, 0.2),
+		0 0 4px rgba(0, 0, 51, 0.2);
+}
+
+.exit_prev_button img {
+	width: 40px;
+}

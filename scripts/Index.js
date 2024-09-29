@@ -4,10 +4,17 @@ import { MyDiarys } from "../scripts/dairys.js";
 import {
 	getTodayDate,
 	calculateChars,
-	modifyMyListOfDiary
+	modifyMyListOfDiary,
+	setToLocalStorage,
+	getDairyFromStorage
 } from "./sidefunctions.js";
 
-let DiaryLists = [...MyDiarys];
+let DiaryLists = getDairyFromStorage();
+
+if (!DiaryLists) {
+	DiaryLists = [...MyDiarys];
+	setToLocalStorage(DiaryLists);
+}
 
 const { renderCreateDiary, renderDiarysPreviewHead, renderPreview } =
 	RenderHtml;
@@ -18,12 +25,10 @@ function diaryListRender(value) {
 }
 
 function diaryListEventListner() {
-	const allDiaryPreview = document.querySelectorAll(
-		".preview_diary_container_js"
-	);
+	const allDiaryPreview = document.querySelectorAll(".preview_diary_head_js");
 
 	allDiaryPreview.forEach((preview, idx) => {
-		preview.addEventListener("dblclick", () => showPreview(idx));
+		preview.addEventListener("click", () => showPreview(idx));
 	});
 
 	const newDiaryButton = document.getElementById("create_NewDiary_Button");
@@ -50,18 +55,20 @@ function diaryListEventListner() {
 }
 
 function showPreview(idx) {
+	const getDiaryList = getDairyFromStorage();
 	console.log(idx);
-	let selectedDiarys = DiaryLists.filter((_, i) => {
+	let selectedDiarys = getDiaryList.filter((_, i) => {
 		return i == idx;
 	});
 	// 	console.log(selectedDiarys);
 	renderPreview(selectedDiarys[0]);
-	renderPreviewEventListners();
+	ExitButtonEventListner();
 }
 
 function editDairy(idx) {
+	const getDiaryList = getDairyFromStorage();
 	console.log(idx);
-	let selectedDiarys = DiaryLists.filter((_, i) => {
+	let selectedDiarys = getDiaryList.filter((_, i) => {
 		return i === idx;
 	});
 	renderCreateDiary(selectedDiarys[0]);
@@ -70,10 +77,10 @@ function editDairy(idx) {
 
 function addEditContent(editDairy, idx) {
 	console.log(editDairy);
-	const diarytitle = document.getElementById("head_tittle_js");
-	diarytitle.value = editDairy.tittle;
+	const diarytitle = document.getElementById("head_title_js");
+	diarytitle.value = editDairy.title;
 	const time = document.getElementById("dairy_time");
-	time.textContent = getTodayDate();
+	time.textContent = `${getTodayDate()} |`;
 	const diaryChars = document.getElementById("js-characters_input_count");
 	diaryChars.textContent = editDairy.characters;
 	const mainContent = document.getElementById("dairy_main_input_js");
@@ -83,6 +90,7 @@ function addEditContent(editDairy, idx) {
 		calculateChars(mainContent, diaryChars)
 	);
 	AddEditEventListner(idx);
+	ExitButtonEventListner()
 }
 
 function AddEditEventListner(idx) {
@@ -93,10 +101,13 @@ function AddEditEventListner(idx) {
 
 function ModifyDairyList(idx) {
 	console.log("loaded clicked");
-	
-	const resultObject = getValuesFromRenderCreateDiary()
-	
+
+	const resultObject = getValuesFromRenderCreateDiary();
+
+	resultObject.edited = true;
+
 	modifyMyListOfDiary(DiaryLists, idx, resultObject);
+	setToLocalStorage(DiaryLists);
 	diaryListRender(DiaryLists);
 }
 
@@ -106,6 +117,7 @@ function deleteDairy(idx) {
 		return i != idx;
 	});
 	DiaryLists = selectedDiarys;
+	setToLocalStorage(DiaryLists);
 	diaryListRender(DiaryLists);
 }
 
@@ -119,8 +131,9 @@ function newDairyEventListners() {
 		calculateChars(mainContent, diaryChars)
 	);
 
+	ExitButtonEventListner();
 	const AddDiaryBtn = document.getElementById("add_to_diaries_collection");
-	document.getElementById("head_tittle_js").value = "Untitled";
+	document.getElementById("head_title_js").value = "Untitled";
 	console.log(AddDiaryBtn);
 	AddDiaryBtn.addEventListener("click", () => addNewDiary());
 }
@@ -128,33 +141,45 @@ function newDairyEventListners() {
 function addNewDiary() {
 	console.log("loaded clicked");
 
+	let mainContent = document.getElementById("dairy_main_input_js").value;
+
+	if (!mainContent) {
+		diaryListRender(DiaryLists);
+		return;
+	}
+
 	const resultObject = getValuesFromRenderCreateDiary();
 
-	DiaryLists.push(resultObject);
+	DiaryLists.unshift(resultObject);
+	setToLocalStorage(DiaryLists);
 	diaryListRender(DiaryLists);
 	// 	console.log(DiaryObject);
 }
 
 function getValuesFromRenderCreateDiary() {
-	const diarytitle = document.getElementById("head_tittle_js").value;
+	const diarytitle = document.getElementById("head_title_js").value;
 	const time = document.getElementById("dairy_time").textContent;
 	const diaryChars = document.getElementById(
 		"js-characters_input_count"
 	).textContent;
 	const mainContent = document.getElementById("dairy_main_input_js").value;
 	const DiaryObject = {
-		tittle: diarytitle,
+		title: diarytitle,
 		date: time,
 		characters: diaryChars,
-		context: mainContent
+		context: mainContent,
+		edited: false
 	};
 	return DiaryObject;
 }
 
-function renderPreviewEventListners() {
+function ExitButtonEventListner() {
 	const exitButton = document.getElementById("preview_exit_button_js");
 
-	exitButton.addEventListener("click", () => diaryListRender(DiaryLists));
+	exitButton.addEventListener("click", () => {
+		console.log("whayyyyy");
+		return diaryListRender(DiaryLists);
+	});
 }
 
 diaryListRender(DiaryLists);

@@ -1,0 +1,53 @@
+.dairy_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.creatDairy_head_title {
+	margin: 70px 50px 8px 50px;
+	font-size: 2rem;
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+/*.creatDairy_head_title::placeholder {*/
+/*	align-self: center;*/
+/*}*/
+
+.Head_info_container {
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+	margin: 0 0 50px 0;
+	opacity: 0.6;
+}
+
+.dairy_main_input {
+	width: 82vw;
+	height: 60vh;
+	padding: 16px;
+	border: 10px double var(--color_tec);
+	outline: none;
+	font-size: 1.5rem;
+	border-radius: 10px;
+	background-color: var(--bg_color_secondary);
+}
+
+#add_to_diaries_collection {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border-radius: 25px;
+	margin: 20px;
+	padding: 10px;
+	align-self: center;
+	border: none;
+	border-radius: 35px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+#add_to_diaries_collection img {
+	width: 52px;
+}
